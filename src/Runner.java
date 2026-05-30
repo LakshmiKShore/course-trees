@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Runner {
 
     public static void main(String[] args) {
@@ -14,7 +16,7 @@ public class Runner {
                         new Group(new Course[] {calcIV, realIntro}, 1)
                             }, 2));
 
-        System.out.println(complexVar.getPrereq().toString(0, 50));
+        complexVar.printPrereq(3);
     }
 
 }

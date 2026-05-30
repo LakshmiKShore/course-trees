@@ -33,12 +33,18 @@ public class Course {
         this.prereq = toCopy.getPrereq();
     }
 
-
+    //Prints out the prerequisites of the course to a certain depth.
+    public void printPrereq(int depth) {
+        System.out.println(this);
+        System.out.println(prereq.toString(0, depth));
+    }
 
     //toString. Returns the CRN (subject + number).
     public String toString() {
         return subject + number;
     }
+
+
 
     //Getter Methods.
     public String getSubject() {
