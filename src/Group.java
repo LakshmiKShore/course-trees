@@ -50,7 +50,7 @@ public class Group {
         this.amount = toCopy.getAmount();
         this.isTerminal = toCopy.isTerminal();
     }
-
+    
 
     //toString.
     public String toString() {
@@ -105,4 +105,6 @@ public class Group {
     public boolean isTerminal() {
         return isTerminal;
     }
+
+    public boolean isEmpty() {return (isTerminal && courses.length == 0);}
 }

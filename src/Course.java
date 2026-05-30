@@ -39,6 +39,24 @@ public class Course {
         System.out.println(prereq.toString(0, depth));
     }
 
+
+    //Returns a 2d array of courses split into depths. Depth zero is the course that the method was called on.
+    //Depth one ... the courses that are prerequisites of the course the method was called on.\
+    //Depth two ... the prereqs of the courses of depth one.
+    //The final depth (and the number of rows in the 2d array) occurs when all courses of that depth have no prereqs.
+    //Uses breadth-first search.
+    public Course[][] groupsByDepth() {
+
+        //TODO: Finish
+
+        //Base case.
+        if (prereq.isEmpty()) {
+
+        }
+    }
+
+
+
     //toString. Returns the CRN (subject + number).
     public String toString() {
         return subject + number;
