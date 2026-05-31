@@ -45,6 +45,7 @@ public class Course {
     //Depth two ... the prereqs of the courses of depth one.
     //The final depth (and the number of rows in the 2d array) occurs when all courses of that depth have no prereqs.
     //Uses breadth-first search.
+    /*
     public Course[][] groupsByDepth() {
 
         //TODO: Finish
@@ -54,6 +55,7 @@ public class Course {
 
         }
     }
+     */
 
 
 
@@ -73,7 +75,16 @@ public class Course {
         return number;
     }
 
+    public boolean hasPrereqs() {
+        return prereq.isEmpty();
+    }
+
+    //If the course has no prerequisites, returns a new group containing only this course.
     public Group getPrereq() {
-        return prereq;
+        if (hasPrereqs()) {
+            return new Group(new Course[] {this}, 1);
+        } else {
+            return prereq;
+        }
     }
 }

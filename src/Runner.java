@@ -16,7 +16,9 @@ public class Runner {
                         new Group(new Course[] {calcIV, realIntro}, 1)
                             }, 2));
 
-        complexVar.printPrereq(3);
+        complexVar.printPrereq(0);
+
+        System.out.println(complexVar.getPrereq().expand());
     }
 
 }

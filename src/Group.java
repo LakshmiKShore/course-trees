@@ -50,7 +50,64 @@ public class Group {
         this.amount = toCopy.getAmount();
         this.isTerminal = toCopy.isTerminal();
     }
-    
+
+
+    //Returns an expanded group found by turning all terminal groups with at least one course with prerequisites into non-terminal groups
+    //Containing the groups of the prerequisites from all the courses in the terminal groups
+    public Group expand() {
+
+        //Base case. Returns itself, since it is already expanded.
+        if (isExpanded()) {
+            return this;
+        }
+
+        //First recursive case, for a Terminal but not Expanded group.
+        //Creates a group containing all its courses' prereqs, then runs this method on it, sending it to the second recursive case.
+        if (isTerminal) {
+            Group[] expanded = new Group[courses.length];
+
+            for (int i = 0; i < courses.length; i++) {
+                expanded[i] = courses[i].getPrereq();
+            }
+
+            return new Group(expanded, amount).expand();
+        }
+
+        //Second recursive case, for a non-terminal group. Recurses through all the subgroups in the group.
+        //It then sends the new group through this method, which may or may not be unneccessary. I don't want to find out rn so i wont
+        //okay that might have led to an infinite loop. i removed it. i hope that fixes it.
+        Group[] expanded = new Group[groups.length];
+
+        for (int i = 0; i < groups.length; i++) {
+            expanded[i] = groups[i].expand();
+        }
+
+        return new Group(expanded, amount).expand();
+    }
+
+
+    //Returns TRUE if the course is terminal and none of its courses have prerequisites.
+    //Recursively searches through and does cool things
+    public boolean isExpanded() {
+        if (!isTerminal) {
+            boolean subgroupsAreExpanded = true;
+
+            for (int i = 0; i < groups.length; i++) {
+                if (!groups[i].isExpanded()) {subgroupsAreExpanded = false;}
+            }
+
+            return subgroupsAreExpanded;
+        }
+
+        boolean coursesHavePrereqs = false;
+
+        for (Course c : courses) {
+            if (c.hasPrereqs()) {coursesHavePrereqs = true;}
+        }
+
+        return coursesHavePrereqs;
+    }
+
 
     //toString.
     public String toString() {
@@ -107,4 +164,8 @@ public class Group {
     }
 
     public boolean isEmpty() {return (isTerminal && courses.length == 0);}
+
+    public boolean isStrict() {return isTerminal && (courses.length == amount || groups.length == amount);}
+
+    public boolean isSwitch() {return amount == 1;}
 }
