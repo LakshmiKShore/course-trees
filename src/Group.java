@@ -86,6 +86,9 @@ public class Group {
     }
 
 
+    //Returns TRUE if the group is equivalent to the other group.
+    //A group is equivalent to another group if
+
     //Returns TRUE if the course is terminal and none of its courses have prerequisites.
     //Recursively searches through and does cool things
     public boolean isExpanded() {
